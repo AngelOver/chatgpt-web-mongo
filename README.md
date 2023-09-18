@@ -74,7 +74,7 @@
 | `ChatGPTUnofficialProxyAPI(网页 accessToken)` | 是     | 相对不可靠 | 聪明 |
 
 对比：
-1. `ChatGPTAPI` 使用 `gpt-3.5-turbo` 通过 `Claude` 官方 `API` 调用 `ChatGPT`
+1. `ChatGPTAPI` 使用 `gpt-3.5-turbo` 通过 `OpenAI` 官方 `API` 调用 `ChatGPT`
 2. `ChatGPTUnofficialProxyAPI` 使用非官方代理服务器访问 `ChatGPT` 的后端`API`，绕过`Cloudflare`（依赖于第三方服务器，并且有速率限制）
 
 警告：
@@ -86,9 +86,9 @@
 
 切换方式：
 1. 进入 `service/.env.example` 文件，复制内容到 `service/.env` 文件
-2. 使用 `Claude API Key` 请填写 `Claude_API_KEY` 字段 [(获取 apiKey)](https://platform.Claude.com/overview)
-3. 使用 `Web API` 请填写 `Claude_ACCESS_TOKEN` 字段 [(获取 accessToken)](https://chat.Claude.com/api/auth/session)
-4. 同时存在时以 `Claude API Key` 优先
+2. 使用 `OpenAI API Key` 请填写 `OPENAI_API_KEY` 字段 [(获取 apiKey)](https://platform.openai.com/overview)
+3. 使用 `Web API` 请填写 `OPENAI_ACCESS_TOKEN` 字段 [(获取 accessToken)](https://chat.openai.com/api/auth/session)
+4. 同时存在时以 `OpenAI API Key` 优先
 
 环境变量：
 
@@ -136,16 +136,16 @@ npm install pnpm -g
 ```
 
 ### 填写密钥
-获取 `Claude Api Key` 或 `accessToken` 并填写本地环境变量 [跳转](#介绍)
+获取 `Openai Api Key` 或 `accessToken` 并填写本地环境变量 [跳转](#介绍)
 
 ```
 # service/.env 文件
 
-# Claude API Key - https://platform.Claude.com/overview
-Claude_API_KEY=
+# OpenAI API Key - https://platform.openai.com/overview
+OPENAI_API_KEY=
 
-# change this to an `accessToken` extracted from the ChatGPT site's `https://chat.Claude.com/api/auth/session` response
-Claude_ACCESS_TOKEN=
+# change this to an `accessToken` extracted from the ChatGPT site's `https://chat.openai.com/api/auth/session` response
+OPENAI_ACCESS_TOKEN=
 ```
 
 ## 安装依赖
@@ -185,13 +185,13 @@ pnpm dev
 
 `API` 可用：
 
-- `Claude_API_KEY` 和 `Claude_ACCESS_TOKEN` 二选一
-- `Claude_API_BASE_URL` 设置接口地址，可选，默认：`https://api.Claude.com`
-- `Claude_API_DISABLE_DEBUG` 设置接口关闭 debug 日志，可选，默认：empty 不关闭
+- `OPENAI_API_KEY` 和 `OPENAI_ACCESS_TOKEN` 二选一
+- `OPENAI_API_BASE_URL` 设置接口地址，可选，默认：`https://api.openai.com`
+- `OPENAI_API_DISABLE_DEBUG` 设置接口关闭 debug 日志，可选，默认：empty 不关闭
 
 `ACCESS_TOKEN` 可用：
 
-- `Claude_ACCESS_TOKEN`  和 `Claude_API_KEY` 二选一，同时存在时，`Claude_API_KEY` 优先
+- `OPENAI_ACCESS_TOKEN`  和 `OPENAI_API_KEY` 二选一，同时存在时，`OPENAI_API_KEY` 优先
 - `API_REVERSE_PROXY` 设置反向代理，可选，默认：`https://ai.fakeopen.com/api/conversation`，[社区](https://github.com/transitive-bullshit/chatgpt-api#reverse-proxy)（注意：只有这两个是推荐，其他第三方来源，请自行甄别）
 
 通用：
@@ -217,10 +217,10 @@ pnpm dev
 docker build -t chatgpt-web .
 
 # 前台运行
-docker run --name chatgpt-web --rm -it -p 127.0.0.1:3002:3002 --env Claude_API_KEY=your_api_key chatgpt-web
+docker run --name chatgpt-web --rm -it -p 127.0.0.1:3002:3002 --env OPENAI_API_KEY=your_api_key chatgpt-web
 
 # 后台运行
-docker run --name chatgpt-web -d -p 127.0.0.1:3002:3002 --env Claude_API_KEY=your_api_key chatgpt-web
+docker run --name chatgpt-web -d -p 127.0.0.1:3002:3002 --env OPENAI_API_KEY=your_api_key chatgpt-web
 
 # 运行地址
 http://localhost:3002/
@@ -280,7 +280,7 @@ services:
 volumes:
   mongodb: {}
 ```
-- `Claude_API_BASE_URL`  可选，设置 `Claude_API_KEY` 时可用
+- `OPENAI_API_BASE_URL`  可选，设置 `OPENAI_API_KEY` 时可用
 
 #### 防止爬虫抓取
 

@@ -50,7 +50,7 @@ onMounted(() => {
         <div class="flex items-center space-x-4">
           <span class="flex-shrink-0 w-[100px]">{{ $t('setting.apiBaseUrl') }}</span>
           <div class="flex-1">
-            <NInput :value="config.apiBaseUrl" placeholder="https://api.Claude.com, Only used by ChatGPTAPI" @input="(val) => { config.apiBaseUrl = val }" />
+            <NInput :value="config.apiBaseUrl" placeholder="https://api.openai.com, Only used by ChatGPTAPI" @input="(val) => { config.apiBaseUrl = val }" />
           </div>
         </div>
         <div class="flex items-center space-x-4">

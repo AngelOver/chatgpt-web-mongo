@@ -38,7 +38,7 @@
 - 显示回复消息原文的选项 [[yilozt](https://github.com/Chanzhaoyu/chatgpt-web/pull/672)]
 - 添加单 `IP` 每小时请求限制。环境变量： `MAX_REQUEST_PER_HOUR` [[zhuxindong ](https://github.com/Chanzhaoyu/chatgpt-web/pull/718)]
 - 前端添加角色设定，仅 `API` 方式可见 [[quzard](https://github.com/Chanzhaoyu/chatgpt-web/pull/768)]
-- `Claude_API_MODEL` 变量现在对 `ChatGPTUnofficialProxyAPI` 也生效，注意：`Token` 和 `API` 的模型命名不一致，不能直接填入 `gpt-3.5` 或者 `gpt-4` [[hncboy](https://github.com/Chanzhaoyu/chatgpt-web/pull/632)]
+- `OPENAI_API_MODEL` 变量现在对 `ChatGPTUnofficialProxyAPI` 也生效，注意：`Token` 和 `API` 的模型命名不一致，不能直接填入 `gpt-3.5` 或者 `gpt-4` [[hncboy](https://github.com/Chanzhaoyu/chatgpt-web/pull/632)]
 - 添加繁体中文 `Prompts` [[PeterDaveHello](https://github.com/Chanzhaoyu/chatgpt-web/pull/796)]
 
 ## Enhancement
@@ -69,7 +69,7 @@
 `2023-03-17`
 
 ## BugFix
-- 回退 `chatgpt` 版本，原因：导致 `Claude_API_BASE_URL` 代理失效
+- 回退 `chatgpt` 版本，原因：导致 `OPENAI_API_BASE_URL` 代理失效
 - 修复缺省状态的 `usingContext` 默认值
 
 ## v2.10.6
@@ -171,7 +171,7 @@
 - 移动端下输入框获得焦点时左侧按钮隐藏
 
 ## BugFix
-- 修复 `2.10.1` 中添加 `Claude_API_MODEL` 变量的判断错误，会导致默认模型指定失效，抱歉
+- 修复 `2.10.1` 中添加 `OPENAI_API_MODEL` 变量的判断错误，会导致默认模型指定失效，抱歉
 - 回退 `2.10.1` 中前端变量影响 `Docker` 打包
 
 ## v2.10.1
@@ -192,7 +192,7 @@
 
 ## Enhancement
 - 感谢 [nagaame](https://github.com/Chanzhaoyu/chatgpt-web/pull/415) 优化`docker`打包镜像文件过大的问题
-- 感谢 [xieccc](https://github.com/Chanzhaoyu/chatgpt-web/pull/404) 新增 `API` 模型配置变量 `Claude_API_MODEL`
+- 感谢 [xieccc](https://github.com/Chanzhaoyu/chatgpt-web/pull/404) 新增 `API` 模型配置变量 `OPENAI_API_MODEL`
 - 感谢 [acongee](https://github.com/Chanzhaoyu/chatgpt-web/pull/394) 优化输出时滚动条问题
 
 ## BugFix
@@ -264,7 +264,7 @@
 ### Feature
 - 感谢 [hyln9](https://github.com/Chanzhaoyu/chatgpt-web/pull/247) 添加对渲染 `LaTex` 数学公式的支持
 - 感谢 [ottocsb](https://github.com/Chanzhaoyu/chatgpt-web/pull/227) 添加支持 `webAPP` (苹果添加到主页书签访问)支持
-- 添加 `Claude_API_BASE_URL` 可选环境变量[#249]
+- 添加 `OPENAI_API_BASE_URL` 可选环境变量[#249]
 ## Enhancement
 - 优化在高分屏上主题内容的最大宽度[#257]
 - 现在文字按单词截断[#215][#225]
