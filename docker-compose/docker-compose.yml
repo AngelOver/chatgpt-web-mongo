@@ -16,7 +16,7 @@ services:
       # 每小时最大请求次数，可选，默认无限
       MAX_REQUEST_PER_HOUR: 0
       # 网站名称
-      SITE_TITLE: ChatGpt Web
+      SITE_TITLE: Claude AI
       # mongodb 的连接字符串
       MONGODB_URL: 'mongodb://chatgpt:xxxx@database:27017'
       # 开启注册之后 密码加密的盐
