@@ -24,7 +24,7 @@ export function defaultSetting(): UserState {
       name: '',
       description: '',
       root: false,
-      config: { chatModel: 'gpt-3.5-turbo' },
+      config: { chatModel: 'Claude' },
       roles: [],
     },
   }
@@ -34,7 +34,7 @@ export function getLocalState(): UserState {
   const localSetting: UserState | undefined = ss.get(LOCAL_NAME)
   if (localSetting != null && localSetting.userInfo != null && localSetting.userInfo.config == null) {
     localSetting.userInfo.config = new UserConfig()
-    localSetting.userInfo.config.chatModel = 'gpt-3.5-turbo'
+    localSetting.userInfo.config.chatModel = 'Claude'
   }
   return { ...defaultSetting(), ...localSetting }
 }

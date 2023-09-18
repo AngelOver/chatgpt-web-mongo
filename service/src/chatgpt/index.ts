@@ -22,12 +22,12 @@ const { HttpsProxyAgent } = httpsProxyAgent
 dotenv.config()
 
 const ErrorCodeMessage: Record<string, string> = {
-  401: '[OpenAI] 提供错误的API密钥 | Incorrect API key provided',
-  403: '[OpenAI] 服务器拒绝访问，请稍后再试 | Server refused to access, please try again later',
-  502: '[OpenAI] 错误的网关 |  Bad Gateway',
-  503: '[OpenAI] 服务器繁忙，请稍后再试 | Server is busy, please try again later',
-  504: '[OpenAI] 网关超时 | Gateway Time-out',
-  500: '[OpenAI] 服务器繁忙，请稍后再试 | Internal Server Error',
+  401: '[Claude] 提供错误的API密钥 | Incorrect API key provided',
+  403: '[Claude] 服务器拒绝访问，请稍后再试 | Server refused to access, please try again later',
+  502: '[Claude] 错误的网关 |  Bad Gateway',
+  503: '[Claude] 服务器繁忙，请稍后再试 | Server is busy, please try again later',
+  504: '[Claude] 网关超时 | Gateway Time-out',
+  500: '[Claude] 服务器繁忙，请稍后再试 | Internal Server Error',
 }
 
 let auditService: TextAuditService
@@ -40,7 +40,7 @@ export async function initApi(key: KeyConfig, chatModel: CHATMODEL) {
   const model = chatModel as string
 
   if (key.keyModel === 'ChatGPTAPI') {
-    const OPENAI_API_BASE_URL = config.apiBaseUrl
+    const Claude_API_BASE_URL = config.apiBaseUrl
 
     const options: ChatGPTAPIOptions = {
       apiKey: key.key,
@@ -76,8 +76,8 @@ export async function initApi(key: KeyConfig, chatModel: CHATMODEL) {
       options.maxResponseTokens = 1024
     }
 
-    if (isNotEmptyString(OPENAI_API_BASE_URL))
-      options.apiBaseUrl = `${OPENAI_API_BASE_URL}/v1`
+    if (isNotEmptyString(Claude_API_BASE_URL))
+      options.apiBaseUrl = `${Claude_API_BASE_URL}/v1`
 
     await setupProxy(options)
 
@@ -223,15 +223,15 @@ async function fetchBalance() {
   const endDate = new Date(now + 24 * 60 * 60 * 1000)
 
   const config = await getCacheConfig()
-  const OPENAI_API_KEY = config.apiKey
-  const OPENAI_API_BASE_URL = config.apiBaseUrl
+  const Claude_API_KEY = config.apiKey
+  const Claude_API_BASE_URL = config.apiBaseUrl
 
-  if (!isNotEmptyString(OPENAI_API_KEY))
+  if (!isNotEmptyString(Claude_API_KEY))
     return Promise.resolve('-')
 
-  const API_BASE_URL = isNotEmptyString(OPENAI_API_BASE_URL)
-    ? OPENAI_API_BASE_URL
-    : 'https://api.openai.com'
+  const API_BASE_URL = isNotEmptyString(Claude_API_BASE_URL)
+    ? Claude_API_BASE_URL
+    : 'https://api.Claude.com'
 
   // 查是否订阅
   const urlSubscription = `${API_BASE_URL}/v1/dashboard/billing/subscription`
@@ -241,7 +241,7 @@ async function fetchBalance() {
   const urlUsage = `${API_BASE_URL}/v1/dashboard/billing/usage?start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}`
 
   const headers = {
-    'Authorization': `Bearer ${OPENAI_API_KEY}`,
+    'Authorization': `Bearer ${Claude_API_KEY}`,
     'Content-Type': 'application/json',
   }
   let socksAgent
@@ -262,7 +262,7 @@ async function fetchBalance() {
     // 获取API限额
     let response = await fetch(urlSubscription, { agent: socksAgent === undefined ? httpsAgent : socksAgent, headers })
     if (!response.ok) {
-      console.error('您的账户已被封禁，请登录OpenAI进行查看。')
+      console.error('您的账户已被封禁，请登录Claude进行查看。')
       return
     }
     interface SubscriptionData {
@@ -400,7 +400,7 @@ async function getRandomApiKey(user: UserInfo, chatModel: CHATMODEL, accountId?:
 function getAccountId(accessToken: string): string {
   try {
     const jwt = jwt_decode(accessToken) as JWT
-    return jwt['https://api.openai.com/auth'].user_id
+    return jwt['https://api.Claude.com/auth'].user_id
   }
   catch (error) {
     return ''

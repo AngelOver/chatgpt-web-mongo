@@ -48,7 +48,7 @@ const messageRef = ref<HTMLElement>()
 const indexRef = ref<number>(0)
 indexRef.value = props.responseCount ?? 0
 
-const url_openai_token = 'https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them'
+const url_Claude_token = 'https://help.Claude.com/en/articles/4936856-what-are-tokens-and-how-to-count-them'
 
 const options = computed(() => {
   const common = [
@@ -163,7 +163,7 @@ async function handlePreviousResponse(next: number) {
                 {{ usage.estimated ? t('chat.usageEstimate') : '' }}
                 {{ t('chat.usagePrompt') }} {{ usage.prompt_tokens }}
                 + {{ t('chat.usageResponse') }} {{ usage.completion_tokens }}
-                = {{ t('chat.usageTotal') }}<a :href="url_openai_token" target="_blank">(?)</a>
+                = {{ t('chat.usageTotal') }}<a :href="url_Claude_token" target="_blank">(?)</a>
                 {{ usage.total_tokens }}
               </span>
             </NPopover>

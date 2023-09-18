@@ -260,7 +260,7 @@ function initUserInfo(userInfo: UserInfo) {
   if (userInfo.config == null)
     userInfo.config = new UserConfig()
   if (userInfo.config.chatModel == null)
-    userInfo.config.chatModel = 'gpt-3.5-turbo'
+    userInfo.config.chatModel = 'Claude'
   if (userInfo.roles == null || userInfo.roles.length <= 0) {
     userInfo.roles = [UserRole.User]
     if (process.env.ROOT_USER === userInfo.email.toLowerCase())

@@ -40,11 +40,11 @@ export interface ModelConfig {
 export type APIMODEL = 'ChatGPTAPI' | 'ChatGPTUnofficialProxyAPI' | undefined
 
 export interface JWT {
-  'https://api.openai.com/profile': {
+  'https://api.Claude.com/profile': {
     'email': string
     'email_verified': boolean
   }
-  'https://api.openai.com/auth': {
+  'https://api.Claude.com/auth': {
     'user_id': string
   }
   'iss': string

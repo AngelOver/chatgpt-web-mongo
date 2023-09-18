@@ -11,7 +11,7 @@
 
 [✓] Register & Login & Reset Password
 
-[✓] Sync chat history 
+[✓] Sync chat history
 
 [✓] Front-end page setting apikey
 
@@ -74,16 +74,16 @@ Supports dual models, provides two unofficial `ChatGPT API` methods:
 | `ChatGPTUnofficialProxyAPI(Web accessToken)` | Yes    | Relatively unreliable | Smart |
 
 Comparison:
-1. `ChatGPTAPI` uses `gpt-3.5-turbo-0301` to simulate `ChatGPT` through the official `OpenAI` completion `API` (the most reliable method, but it is not free and does not use models specifically tuned for chat).
+1. `ChatGPTAPI` uses `gpt-3.5-turbo-0301` to simulate `ChatGPT` through the official `Claude` completion `API` (the most reliable method, but it is not free and does not use models specifically tuned for chat).
 2. `ChatGPTUnofficialProxyAPI` accesses `ChatGPT`'s backend `API` via an unofficial proxy server to bypass `Cloudflare` (uses the real `ChatGPT`, is very lightweight, but depends on third-party servers and has rate limits).
 
 [Details](https://github.com/Chanzhaoyu/chatgpt-web/issues/138)
 
 Switching Methods:
 1. Go to the `service/.env.example` file and copy the contents to the `service/.env` file.
-2. For `OpenAI API Key`, fill in the `OPENAI_API_KEY` field [(Get apiKey)](https://platform.openai.com/overview).
-3. For `Web API`, fill in the `OPENAI_ACCESS_TOKEN` field [(Get accessToken)](https://chat.openai.com/api/auth/session).
-4. When both are present, `OpenAI API Key` takes precedence.
+2. For `Claude API Key`, fill in the `Claude_API_KEY` field [(Get apiKey)](https://platform.Claude.com/overview).
+3. For `Web API`, fill in the `Claude_ACCESS_TOKEN` field [(Get accessToken)](https://chat.Claude.com/api/auth/session).
+4. When both are present, `Claude API Key` takes precedence.
 
 Reverse Proxy:
 
@@ -141,16 +141,16 @@ npm install pnpm -g
 
 ### Fill in the Keys
 
-Get `Openai Api Key` or `accessToken` and fill in the local environment variables [jump](#introduction)
+Get `Claude Api Key` or `accessToken` and fill in the local environment variables [jump](#introduction)
 
 ```
 # service/.env file
 
-# OpenAI API Key - https://platform.openai.com/overview
-OPENAI_API_KEY=
+# Claude API Key - https://platform.Claude.com/overview
+Claude_API_KEY=
 
-# change this to an `accessToken` extracted from the ChatGPT site's `https://chat.openai.com/api/auth/session` response
-OPENAI_ACCESS_TOKEN=
+# change this to an `accessToken` extracted from the ChatGPT site's `https://chat.Claude.com/api/auth/session` response
+Claude_ACCESS_TOKEN=
 ```
 
 ## Install Dependencies
@@ -192,11 +192,11 @@ pnpm dev
 
 #### Docker Parameter Example
 
-- `OPENAI_API_KEY` one of two
-- `OPENAI_ACCESS_TOKEN` one of two, `OPENAI_API_KEY` takes precedence when both are present
-- `OPENAI_API_BASE_URL` optional, available when `OPENAI_API_KEY` is set
-- `OPENAI_API_MODEL`  `ChatGPTAPI` OR `ChatGPTUnofficialProxyAPI`
-- `API_REVERSE_PROXY` optional, available when `OPENAI_ACCESS_TOKEN` is set [Reference](#introduction)
+- `Claude_API_KEY` one of two
+- `Claude_ACCESS_TOKEN` one of two, `Claude_API_KEY` takes precedence when both are present
+- `Claude_API_BASE_URL` optional, available when `Claude_API_KEY` is set
+- `Claude_API_MODEL`  `ChatGPTAPI` OR `ChatGPTUnofficialProxyAPI`
+- `API_REVERSE_PROXY` optional, available when `Claude_ACCESS_TOKEN` is set [Reference](#introduction)
 - `AUTH_SECRET_KEY` Access Password，optional
 - `TIMEOUT_MS` timeout, in milliseconds, optional
 - `SOCKS_PROXY_HOST` optional, effective with SOCKS_PROXY_PORT
@@ -213,10 +213,10 @@ pnpm dev
 docker build -t chatgpt-web .
 
 # foreground operation
-docker run --name chatgpt-web --rm -it -p 127.0.0.1:3002:3002 --env OPENAI_API_KEY=your_api_key chatgpt-web
+docker run --name chatgpt-web --rm -it -p 127.0.0.1:3002:3002 --env Claude_API_KEY=your_api_key chatgpt-web
 
 # background operation
-docker run --name chatgpt-web -d -p 127.0.0.1:3002:3002 --env OPENAI_API_KEY=your_api_key chatgpt-web
+docker run --name chatgpt-web -d -p 127.0.0.1:3002:3002 --env Claude_API_KEY=your_api_key chatgpt-web
 
 # running address
 http://localhost:3002/
@@ -274,7 +274,7 @@ services:
 volumes:
   mongodb: {}
 ```
-The `OPENAI_API_BASE_URL` is optional and only used when setting the `OPENAI_API_KEY`.
+The `Claude_API_BASE_URL` is optional and only used when setting the `Claude_API_KEY`.
 
 ### Deployment with Railway
 

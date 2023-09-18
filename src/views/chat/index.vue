@@ -596,6 +596,7 @@ onMounted(() => {
 
   if (authStore.token) {
     const chatModels = authStore.session?.chatModels
+		console.log(chatModels)
     if (chatModels != null && chatModels.filter(d => d.value === userStore.userInfo.config.chatModel).length <= 0)
       ms.error('你选择的模型已不存在，请重新选择 | The selected model not exists, please choose again.', { duration: 7000 })
   }
